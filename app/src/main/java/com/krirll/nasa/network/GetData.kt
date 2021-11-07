@@ -8,8 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface GetData {
-    @GET("apod?api_key=i9jxG8dOwfLh0kqaQKqGA6SGwdO7pqEM51IIvl0k")
-    fun getBestDailyPhoto() : Single<Photo>
 
     @GET("apod?count=20&api_key=i9jxG8dOwfLh0kqaQKqGA6SGwdO7pqEM51IIvl0k&thumbs=true")
     fun getPosts() : Observable<List<Photo>>

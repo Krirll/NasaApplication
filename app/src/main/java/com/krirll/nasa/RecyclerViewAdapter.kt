@@ -9,18 +9,29 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.krirll.nasa.network.Photo
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import java.lang.Exception
 
-class RecyclerViewAdapter(
-    private val list : List<Photo>,
-    private val listener : Main.ListenerRecyclerViewItem = MainViewModel(),
-    private val imageConverter : Image.Converter = PicassoConverter()
-) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+
+    private var list : List<Photo> = listOf()
+    private var listener : Main.ListenerRecyclerViewItem? = null
+    fun setListener(newListener : Main.ListenerRecyclerViewItem) {
+        listener = newListener
+    }
+    fun setList(newList : List<Photo>) {
+        list = newList
+    }
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val title : TextView? = itemView.findViewById(R.id.title)
         val image : ImageView? = itemView.findViewById(R.id.image)
         val progress : ProgressBar? = itemView.findViewById(R.id.progressDownload)
         val downloadButton : Button? = itemView.findViewById(R.id.downloadMore)
+        val more : Button? = itemView.findViewById(R.id.more)
+        val downloadImage : ProgressBar? = itemView.findViewById(R.id.imageProgress)
+        val errorImage : TextView? = itemView.findViewById(R.id.imageError)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,18 +51,35 @@ class RecyclerViewAdapter(
         if (position == list.size) {
             holder.downloadButton?.setOnClickListener {
                 holder.progress?.visibility = View.VISIBLE
-
-                listener.downloadMore()
-                //todo запуск загрузки новых фото
-                //recyclerView.scrollToPosition(your_position)
+                holder.downloadButton.visibility = View.GONE
+                listener?.downloadMore()
             }
         }
         else {
-            holder.title?.text = list[position].title
-            imageConverter.push(holder.image!!, list[position].imageUrl!!)
-            holder.itemView.setOnClickListener {
-                listener.click(list[position])
+            holder.downloadImage?.visibility = View.VISIBLE
+            holder.errorImage?.visibility = View.GONE
+            holder.image?.visibility = View.INVISIBLE
+            holder.more?.visibility = View.INVISIBLE
+            holder.more?.setOnClickListener {
+                listener?.click(list[position])
             }
+            holder.title?.text = list[position].title
+            Picasso.get().isLoggingEnabled = true
+            Picasso.get()
+                .load(list[position].imageUrl)
+                .fit()
+                .centerCrop()
+                .into(holder.image, object : Callback {
+                    override fun onSuccess() {
+                        holder.downloadImage?.visibility = View.INVISIBLE
+                        holder.image?.visibility = View.VISIBLE
+                        holder.more?.visibility = View.VISIBLE
+                    }
+                    override fun onError(e: Exception?) {
+                        holder.downloadImage?.visibility = View.GONE
+                        holder.errorImage?.visibility = View.VISIBLE
+                    }
+                })
         }
     }
 

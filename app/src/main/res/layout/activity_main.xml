@@ -13,15 +13,34 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"/>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_layout"/>
+            <include layout="@layout/shimmer_layout"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:visibility="invisible"
         android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
         android:id="@+id/cardFragment"
+        android:visibility="gone"
         android:backgroundTint="@color/dark_blue"
         android:layout_marginTop="50dp"
         android:layout_marginStart="10dp"

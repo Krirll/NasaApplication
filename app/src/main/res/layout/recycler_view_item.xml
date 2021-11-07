@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/sduidisplay_medium"
         android:textColor="@color/white"
         android:textSize="22sp"
@@ -35,9 +35,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/black"
             app:cardCornerRadius="20dp"
@@ -45,24 +45,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/imageProgress"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/white"/>
+
+                <TextView
+                    android:id="@+id/imageError"
+                    android:text="@string/failed_to_upload_image_check_your_internet_connection"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/sduidisplay_medium"
+                    android:textAlignment="center"
+                    android:visibility="gone"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
             <ImageView
                 android:id="@+id/image"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
         </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/more"
-        android:text="@string/more"
-        android:textAllCaps="false"
-        android:fontFamily="@font/sfuidisplay_light"
-        android:background="#0000"
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:layout_marginEnd="10dp"
+        android:background="#0000"
+        android:fontFamily="@font/sfuidisplay_light"
+        android:text="@string/more"
+        android:textAllCaps="false"
+        android:visibility="invisible"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cardView"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

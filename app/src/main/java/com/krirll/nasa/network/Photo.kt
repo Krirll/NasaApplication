@@ -1,25 +1,31 @@
 package com.krirll.nasa.network
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class Photo : Serializable {
-
     @SerializedName("title")
-    var title : String? = null
+    @Expose
+    var title: String? = null
 
     @SerializedName("hdurl")
-    var imageUrl : String? = null
+    @Expose
+    var imageUrl: String? = null
 
     @SerializedName("explanation")
-    var explanation : String? = null
+    @Expose
+    var explanation: String? = null
 
     @SerializedName("copyright")
-    var author : String? = null
+    @Expose
+    var author: String? = null
 
     @SerializedName("date")
-    var date : String? = null
+    @Expose
+    var date: String? = null
 }
+
 
 //example
 /*

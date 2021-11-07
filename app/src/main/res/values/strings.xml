@@ -6,4 +6,8 @@
     <string name="download">Download</string>
     <string name="more">more</string>
     <string name="download_more">Download more?</string>
+    <string name="the_best_photo_today">The best photo today</string>
+    <string name="author">Author: %s</string>
+    <string name="date">Date: %s</string>
+    <string name="failed_to_upload_image_check_your_internet_connection">Failed to upload image. Check your internet connection</string>
 </resources>

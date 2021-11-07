@@ -1,7 +1,7 @@
 package com.krirll.nasa
 
-import android.widget.ImageView
 import com.krirll.nasa.network.Photo
+import io.reactivex.Observer
 
 interface Main {
 
@@ -11,21 +11,11 @@ interface Main {
     }
 
     interface ObservableListener {
-
-        interface OnFinishedListener {
-            fun onComplete()
-            fun onNext()
-            fun onError()
-        }
-        fun download(listener : OnFinishedListener)
+        fun download(listener : Observer<List<Photo>>)
     }
 
-}
-
-interface Image {
-
-    interface Converter {
-        fun push(view : ImageView, url : String)
+    interface FragmentListener {
+        fun onClose()
     }
 
 }
