@@ -49,6 +49,8 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (position == list.size) {
+            holder.progress?.visibility = View.INVISIBLE
+            holder.downloadButton?.visibility = View.VISIBLE
             holder.downloadButton?.setOnClickListener {
                 holder.progress?.visibility = View.VISIBLE
                 holder.downloadButton.visibility = View.GONE
