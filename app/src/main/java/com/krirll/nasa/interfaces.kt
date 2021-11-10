@@ -1,25 +1,33 @@
 package com.krirll.nasa
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import androidx.cardview.widget.CardView
-import com.krirll.nasa.network.Photo
+import android.view.View
+import com.krirll.nasa.network.PhotoModel
 import io.reactivex.Observer
 
 interface Main {
 
     interface ListenerRecyclerViewItem {
-        fun click(item: Photo)
+        fun click(item: PhotoModel)
         fun downloadMore()
     }
 
     interface ObservableListener {
-        fun download(listener : Observer<List<Photo>>)
+        fun getData(listener : Observer<List<PhotoModel>>)
     }
 
     interface FragmentListener {
-        fun onClose(cardView : CardView)
+        fun onOpen(view : View)
+        fun onClose(view : View)
         fun downloadImage(image : Drawable, context: Context)
+    }
+
+    interface ImageStore {
+        fun saveImage(name : String, bitmap : Bitmap, context: Context)
+        fun createName() : String
+        fun check(name : String) : Boolean
     }
 
 }

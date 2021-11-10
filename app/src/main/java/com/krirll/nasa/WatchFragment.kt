@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.krirll.nasa.network.Photo
+import com.krirll.nasa.network.PhotoModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
 import android.widget.*
 import androidx.cardview.widget.CardView
-
 
 class WatchFragment : Fragment() {
 
@@ -24,7 +23,7 @@ class WatchFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val photo = requireArguments().getSerializable(PHOTO) as Photo
+        val photo = requireArguments().getSerializable(PHOTO) as PhotoModel
         val image = view.findViewById<ImageView>(R.id.imageFragment)
         view.findViewById<TextView>(R.id.titleFragment).text = photo.title
         Picasso.get().isLoggingEnabled = true

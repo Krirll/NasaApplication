@@ -8,19 +8,20 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.krirll.nasa.network.Photo
+import com.krirll.nasa.network.PhotoModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    private var list : List<Photo> = listOf()
+    private var list : List<PhotoModel> = listOf()
     private var listener : Main.ListenerRecyclerViewItem? = null
+
     fun setListener(newListener : Main.ListenerRecyclerViewItem) {
         listener = newListener
     }
-    fun setList(newList : List<Photo>) {
+    fun setList(newList : List<PhotoModel>) {
         list = newList
     }
 
@@ -73,7 +74,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
                 .centerCrop()
                 .into(holder.image, object : Callback {
                     override fun onSuccess() {
-                        holder.downloadImage?.visibility = View.INVISIBLE
+                        holder.downloadImage?.visibility = View.GONE
                         holder.image?.visibility = View.VISIBLE
                         holder.more?.visibility = View.VISIBLE
                     }

@@ -18,33 +18,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/shimmertitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/sduidisplay_medium"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:background="@color/gray"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/shimmerdecorLine"/>
+    <TextView
+        android:id="@+id/shimmertitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/sduidisplay_medium"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:backgroundTint="@color/gray"
+        android:background="@drawable/rounded_corners"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/shimmerdecorLine"/>
 
 
-        <ImageView
-            android:id="@+id/shimmerimage"
-            android:background="@color/gray"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shimmertitle"/>
+    <ImageView
+        android:id="@+id/shimmerimage"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shimmertitle"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/more"
