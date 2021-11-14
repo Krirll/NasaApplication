@@ -6,7 +6,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class ObservableListener : Main.ObservableListener {
+class ObservableListener() : Main.ObservableListener {
     override fun getData(listener: Observer<List<PhotoModel>>) {
         val retrofitService = RetrofitService.factory()
         retrofitService.getPosts()

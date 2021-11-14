@@ -1,4 +1,4 @@
-package com.krirll.nasa
+package com.krirll.nasa.ui
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -13,6 +13,7 @@ import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.krirll.nasa.*
 import com.krirll.nasa.network.PhotoModel
 
 class MainActivity : AppCompatActivity() {
@@ -42,21 +43,26 @@ class MainActivity : AppCompatActivity() {
                 startFragment(it)
         })
         viewModel.getOnErrorAction().observe(this, {
-            if (it != null)
+            if (it != null) {
                 showDialog(
-                    adapter.itemCount - 1 == 0,
-                    "Check your internet connection",
-                    "CONNECTION ERROR"
+                    getString(R.string.check_internet),
+                    getString(R.string.connection_error),
+                    if (adapter.itemCount - 1 == 0)
+                        this
+                    else
+                        null
                 )
+                adapter.notifyDataSetChanged()
+            }
         })
         viewModel.downloadMore()
     }
 
-    private fun showDialog(isEmpty : Boolean, message : String, title : String) {
+    private fun showDialog(message : String, title : String, activity : MainActivity? = null) {
         val dialog = AlertDialog.Builder(this).apply {
             setMessage(message)
             setCancelable(false)
-            setPositiveButton("OK") { dialog, _ -> dialog.dismiss(); if (isEmpty) finish() }
+            setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss(); if (activity != null) finish() }
         }
         val alertError = dialog.create()
         alertError.setTitle(title)
@@ -90,9 +96,9 @@ class MainActivity : AppCompatActivity() {
             REQ_CODE ->
                 if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     showDialog(
-                        false,
-                        "the application needs access to the storage so that you can save images",
-                        "Application")
+                        getString(R.string.permission_message),
+                        getString(R.string.application)
+                    )
                 }
         }
     }

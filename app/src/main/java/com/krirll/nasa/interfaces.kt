@@ -30,4 +30,9 @@ interface Main {
         fun check(name : String) : Boolean
     }
 
+    interface Permission {
+        fun checkWriteStoragePermission(context : Context) : Boolean
+        fun getPermission(context: Context)
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.krirll.nasa
+package com.krirll.nasa.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +12,8 @@ import java.lang.Exception
 
 import android.widget.*
 import androidx.cardview.widget.CardView
+import com.krirll.nasa.Main
+import com.krirll.nasa.R
 
 class WatchFragment : Fragment() {
 
@@ -53,7 +55,7 @@ class WatchFragment : Fragment() {
             else
                 Toast.makeText(
                     view.context,
-                    "Error while downloading image",
+                    getString(R.string.error_download),
                     Toast.LENGTH_SHORT
                 ).show()
         }

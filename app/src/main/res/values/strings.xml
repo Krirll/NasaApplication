@@ -10,4 +10,11 @@
     <string name="author">Author: %s</string>
     <string name="date">Date: %s</string>
     <string name="failed_to_upload_image_check_your_internet_connection">Failed to upload image. Check your internet connection</string>
+    <string name="permission_message">the application needs access to the storage so that you can save images</string>
+    <string name="application">Application</string>
+    <string name="ok">OK</string>
+    <string name="check_internet">Check your internet connection</string>
+    <string name="connection_error">CONNECTION ERROR</string>
+    <string name="error_download">Error while downloading image</string>
+    <string name="success">Download success</string>
 </resources>

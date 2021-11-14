@@ -16,12 +16,12 @@
         android:theme="@style/Theme.NASA"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation="locked"/>
         <activity
-            android:name=".StartActivity"
+            android:name=".ui.StartActivity"
             android:configChanges="orientation"
             android:screenOrientation="locked"
             android:exported="true">
