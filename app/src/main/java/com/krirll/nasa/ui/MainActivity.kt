@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.krirll.nasa.*
+import com.krirll.nasa.adapter.RecyclerViewAdapter
 import com.krirll.nasa.network.PhotoModel
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         val viewModel : MainViewModel by viewModels()
         adapter.setListener(viewModel)
-        viewModel.getRecyclerViewList().observe(this, {
+        viewModel.download().observe(this, {
             if (it.isNotEmpty()) {
                 shimmerLayout.stopShimmerAnimation()
                 shimmerLayout.visibility = View.GONE
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         })
-        viewModel.getLastPosition().observe(this, { recyclerView.scrollToPosition(it) })
         viewModel.getPhotoForFragment().observe(this, {
                 startFragment(it)
         })
@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         })
-        viewModel.downloadMore()
     }
 
     private fun showDialog(message : String, title : String, activity : MainActivity? = null) {

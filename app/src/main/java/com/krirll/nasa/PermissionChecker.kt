@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.krirll.nasa.ui.MainActivity
 import java.io.Serializable
 
-class PermissionChecker : Main.Permission , Serializable {
+class PermissionChecker : Permission , Serializable {
 
     override fun checkWriteStoragePermission(context : Context) =
         ContextCompat.checkSelfPermission(

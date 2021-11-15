@@ -6,7 +6,7 @@ import android.provider.MediaStore
 import java.io.Serializable
 import java.util.*
 
-class Store : Main.ImageStore, Serializable {
+class Store : ImageStore, Serializable {
     override fun saveImage(name : String, bitmap: Bitmap, context: Context) {
         MediaStore.Images.Media.insertImage(
             context.contentResolver,

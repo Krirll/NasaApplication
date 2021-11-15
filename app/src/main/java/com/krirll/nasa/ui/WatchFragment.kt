@@ -12,7 +12,7 @@ import java.lang.Exception
 
 import android.widget.*
 import androidx.cardview.widget.CardView
-import com.krirll.nasa.Main
+import com.krirll.nasa.FragmentListener
 import com.krirll.nasa.R
 
 class WatchFragment : Fragment() {
@@ -30,7 +30,7 @@ class WatchFragment : Fragment() {
         view.findViewById<TextView>(R.id.titleFragment).text = photo.title
         Picasso.get().isLoggingEnabled = true
         Picasso.get()
-            .load(photo.imageUrl)
+            .load(photo.hdImageUrl ?: photo.imageOfVideoUrl)
             .into(image, object  : Callback {
                 override fun onSuccess() {
                     view.findViewById<ProgressBar>(R.id.imageProgress).visibility = View.INVISIBLE
@@ -45,7 +45,7 @@ class WatchFragment : Fragment() {
         view.findViewById<TextView>(R.id.description).text = photo.explanation
         view.findViewById<TextView>(R.id.author).text = getString(R.string.author, photo.author ?: "Unknown")
         view.findViewById<TextView>(R.id.date).text = getString(R.string.date, photo.date)
-        val listener = requireArguments().getSerializable(CLOSE_LISTENER) as Main.FragmentListener
+        val listener = requireArguments().getSerializable(CLOSE_LISTENER) as FragmentListener
         view.findViewById<Button>(R.id.closeButton).setOnClickListener {
             listener.onClose(view.parent.parent as CardView)
         }

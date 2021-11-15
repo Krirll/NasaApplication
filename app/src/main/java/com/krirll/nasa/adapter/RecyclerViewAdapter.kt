@@ -1,4 +1,4 @@
-package com.krirll.nasa
+package com.krirll.nasa.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.krirll.nasa.ListenerRecyclerViewItem
+import com.krirll.nasa.R
 import com.krirll.nasa.network.PhotoModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -16,9 +18,9 @@ import java.lang.Exception
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private var list : List<PhotoModel> = listOf()
-    private var listener : Main.ListenerRecyclerViewItem? = null
+    private var listener : ListenerRecyclerViewItem? = null
 
-    fun setListener(newListener : Main.ListenerRecyclerViewItem) {
+    fun setListener(newListener : ListenerRecyclerViewItem) {
         listener = newListener
     }
     fun setList(newList : List<PhotoModel>) {
@@ -55,7 +57,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
             holder.downloadButton?.setOnClickListener {
                 holder.progress?.visibility = View.VISIBLE
                 holder.downloadButton.visibility = View.GONE
-                listener?.downloadMore()
+                listener?.download()
             }
         }
         else {
@@ -69,7 +71,12 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
             holder.title?.text = list[position].title
             Picasso.get().isLoggingEnabled = true
             Picasso.get()
-                .load(list[position].imageUrl)
+                .load(
+                    if (list[position].hdImageUrl == null)
+                        list[position].imageOfVideoUrl
+                    else
+                        list[position].imageUrl
+                )
                 .fit()
                 .centerCrop()
                 .into(holder.image, object : Callback {
@@ -88,9 +95,9 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 
     override fun getItemViewType(position: Int): Int {
         return if (position == list.size)
-                    R.layout.last_item_recycler_view
+            R.layout.last_item_recycler_view
                 else
-                    R.layout.recycler_view_item
+            R.layout.recycler_view_item
     }
 
     override fun getItemCount(): Int = list.size + 1

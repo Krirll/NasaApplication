@@ -10,10 +10,10 @@ import androidx.cardview.widget.CardView
 import androidx.core.graphics.drawable.toBitmap
 import java.io.Serializable
 
-class FragmentListener(
-    private val store : Main.ImageStore = Store(),
-    private val permissionChecker : Main.Permission = PermissionChecker()
-) : Main.FragmentListener, Serializable {
+class FragmentListener (
+    private val store : ImageStore = Store(),
+    private val permissionChecker : Permission = PermissionChecker()
+) : ViewListener, Serializable {
 
     override fun onOpen(view: View) {
         val animationUp =

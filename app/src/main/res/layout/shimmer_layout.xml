@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/shimmerdecorLine"
-        android:background="@color/white"
+        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"
@@ -37,29 +37,18 @@
 
     <ImageView
         android:id="@+id/shimmerimage"
-        android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/gray"
+        android:background="@drawable/rounded_corners"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shimmertitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/shimmertitle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/more"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="10dp"
-        android:background="#0000"
-        android:fontFamily="@font/sfuidisplay_light"
-        android:text="@string/more"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shimmerimage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
