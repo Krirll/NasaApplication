@@ -44,10 +44,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Shimmer Facebook
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
     //Dagger
-    implementation 'com.google.dagger:dagger:2.39.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.39.1'
+    def daggerVer = "2.40.1"
+    implementation "com.google.dagger:dagger:$daggerVer"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
     //Retrofit
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

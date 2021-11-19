@@ -1,11 +1,14 @@
 package com.krirll.nasa.network
 
-class RetrofitService private constructor() {
+import javax.inject.Inject
 
-    companion object {
-        private const val BASE_URL = "https://api.nasa.gov/planetary/"
-        fun getRetrofitService() : Service =
-            RetrofitClient.getRetrofitClient(BASE_URL).create(Service::class.java)
-    }
+class RetrofitService
+@Inject constructor(
+    private val retrofitClient : RetrofitClient
+) {
+    private val url = "https://api.nasa.gov/planetary/"
+    fun getRetrofitService(): Service =
+        retrofitClient.getRetrofitClient(url)
+                        .create(Service::class.java)
 
 }

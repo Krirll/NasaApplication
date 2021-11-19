@@ -2,9 +2,7 @@ package com.krirll.nasa.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.krirll.nasa.network.PhotoModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -12,17 +10,10 @@ import java.lang.Exception
 
 import android.widget.*
 import androidx.cardview.widget.CardView
-import com.krirll.nasa.FragmentListener
+import com.krirll.nasa.common.FragmentListener
 import com.krirll.nasa.R
 
-class WatchFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_watch, container, false)
-    }
+class WatchFragment : Fragment(R.layout.fragment_watch) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val photo = requireArguments().getSerializable(PHOTO) as PhotoModel

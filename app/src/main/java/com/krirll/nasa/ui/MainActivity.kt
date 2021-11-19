@@ -15,24 +15,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.krirll.nasa.*
 import com.krirll.nasa.adapter.RecyclerViewAdapter
+import com.krirll.nasa.common.ViewListener
+import com.krirll.nasa.di.components.DaggerMainActivityComponent
 import com.krirll.nasa.network.PhotoModel
+import com.krirll.nasa.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity(
+    private val listener: ViewListener =
+        DaggerMainActivityComponent.builder().build().getFragmentListener()
+) : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val shimmerLayout = findViewById<ShimmerFrameLayout>(R.id.shimmerFrameLayout)
-        shimmerLayout.startShimmerAnimation()
+        shimmerLayout.startShimmer()
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = RecyclerViewAdapter()
         recyclerView.adapter = adapter
         val viewModel : MainViewModel by viewModels()
         adapter.setListener(viewModel)
-        viewModel.download().observe(this, {
+        viewModel.getListPhotoModel().observe(this, {
             if (it.isNotEmpty()) {
-                shimmerLayout.stopShimmerAnimation()
+                shimmerLayout.stopShimmer()
                 shimmerLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
                 adapter.setList(it.toList())
@@ -43,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 startFragment(it)
         })
         viewModel.getOnErrorAction().observe(this, {
-            if (it != null) {
+            if (it) {
                 showDialog(
                     getString(R.string.check_internet),
                     getString(R.string.connection_error),
@@ -70,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun startFragment(photoModel: PhotoModel?) {
         if (photoModel != null) {
-            val listener = FragmentListener()
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace<WatchFragment>(

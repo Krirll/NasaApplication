@@ -8,13 +8,14 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.krirll.nasa.ListenerRecyclerViewItem
+import com.krirll.nasa.common.ListenerRecyclerViewItem
 import com.krirll.nasa.R
 import com.krirll.nasa.network.PhotoModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
+//todo inject picasso module
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private var list : List<PhotoModel> = listOf()

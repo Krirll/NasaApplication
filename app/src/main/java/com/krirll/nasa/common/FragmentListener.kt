@@ -1,4 +1,4 @@
-package com.krirll.nasa
+package com.krirll.nasa.common
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -8,11 +8,14 @@ import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.graphics.drawable.toBitmap
+import com.krirll.nasa.*
 import java.io.Serializable
+import javax.inject.Inject
 
-class FragmentListener (
-    private val store : ImageStore = Store(),
-    private val permissionChecker : Permission = PermissionChecker()
+class FragmentListener
+@Inject constructor(
+    private val store : Store,
+    private val permissionChecker : PermissionChecker
 ) : ViewListener, Serializable {
 
     override fun onOpen(view: View) {
