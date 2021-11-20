@@ -1,7 +1,6 @@
 package com.krirll.nasa.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import com.krirll.nasa.network.PhotoModel
 import com.squareup.picasso.Callback
@@ -10,6 +9,7 @@ import java.lang.Exception
 
 import android.widget.*
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import com.krirll.nasa.common.FragmentListener
 import com.krirll.nasa.R
 

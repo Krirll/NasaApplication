@@ -2,11 +2,11 @@ package com.krirll.nasa.ui
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -22,8 +22,11 @@ import com.krirll.nasa.viewmodel.MainViewModel
 
 class MainActivity(
     private val listener: ViewListener =
-        DaggerMainActivityComponent.builder().build().getFragmentListener()
+        DaggerMainActivityComponent.builder()
+            .build()
+            .getFragmentListener()
 ) : AppCompatActivity() {
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +69,7 @@ class MainActivity(
     private fun showDialog(message : String, title : String, activity : MainActivity? = null) {
         val dialog = AlertDialog.Builder(this).apply {
             setMessage(message)
-            setCancelable(false)
+            setCancelable(true)
             setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss(); if (activity != null) finish() }
         }
         val alertError = dialog.create()

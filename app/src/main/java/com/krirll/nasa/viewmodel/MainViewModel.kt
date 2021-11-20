@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.krirll.nasa.common.ListenerRecyclerViewItem
 import com.krirll.nasa.di.components.DaggerRepositoryComponent
+import com.krirll.nasa.di.modules.RetrofitModule
 import com.krirll.nasa.network.PhotoModel
 import com.krirll.nasa.repository.Repository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,7 +12,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(
-    private var repository: Repository = DaggerRepositoryComponent.builder().build().getRepository()
+    private var repository: Repository =
+        DaggerRepositoryComponent.builder()
+            .retrofitModule(RetrofitModule())
+            .build()
+            .getRepository()
 ) : ViewModel(), ListenerRecyclerViewItem {
 
     private val compositeDisposable = CompositeDisposable()
