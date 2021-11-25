@@ -44,7 +44,8 @@ class MainActivity(
                 shimmerLayout.stopShimmer()
                 shimmerLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
-                adapter.setList(it.toList())
+                //adapter.setList(it.toList())
+                adapter.submitList(it.toList())
                 adapter.notifyDataSetChanged()
             }
         })

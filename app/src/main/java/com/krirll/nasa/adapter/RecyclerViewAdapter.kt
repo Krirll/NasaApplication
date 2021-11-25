@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.krirll.nasa.common.ListenerRecyclerViewItem
 import com.krirll.nasa.R
@@ -17,15 +19,28 @@ import java.lang.Exception
 
 class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    private var list : List<PhotoModel> = listOf()
     private var listener : ListenerRecyclerViewItem? = null
 
     fun setListener(newListener : ListenerRecyclerViewItem) {
         listener = newListener
     }
-    fun setList(newList : List<PhotoModel>) {
-        list = newList
+
+    fun submitList(newList : List<PhotoModel>) {
+        differ.submitList(newList)
     }
+
+    private val differCallback = object : DiffUtil.ItemCallback<PhotoModel>() {
+        override fun areItemsTheSame(oldItem: PhotoModel, newItem: PhotoModel): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: PhotoModel, newItem: PhotoModel): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    private val differ = AsyncListDiffer(this, differCallback)
+
 
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val title : TextView? = itemView.findViewById(R.id.title)
@@ -51,7 +66,7 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position == list.size) {
+        if (position == differ.currentList.size) {
             holder.progress?.visibility = View.INVISIBLE
             holder.downloadButton?.visibility = View.VISIBLE
             holder.downloadButton?.setOnClickListener {
@@ -66,16 +81,16 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
             holder.image?.visibility = View.INVISIBLE
             holder.more?.visibility = View.INVISIBLE
             holder.more?.setOnClickListener {
-                listener?.click(list[position])
+                listener?.click(differ.currentList[position])
             }
-            holder.title?.text = list[position].title
+            holder.title?.text = differ.currentList[position].title
             Picasso.get().isLoggingEnabled = true
             Picasso.get()
                 .load(
-                    if (list[position].hdImageUrl == null)
-                        list[position].imageOfVideoUrl
+                    if (differ.currentList[position].hdImageUrl == null)
+                        differ.currentList[position].imageOfVideoUrl
                     else
-                        list[position].imageUrl
+                        differ.currentList[position].imageUrl
                 )
                 .fit()
                 .centerCrop()
@@ -94,12 +109,12 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == list.size)
+        return if (position == differ.currentList.size)
             R.layout.last_item_recycler_view
                 else
             R.layout.recycler_view_item
     }
 
-    override fun getItemCount(): Int = list.size + 1
+    override fun getItemCount(): Int = differ.currentList.size + 1
 
 }

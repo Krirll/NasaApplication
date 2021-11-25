@@ -7,5 +7,6 @@ import dagger.Module
 
 @Module
 interface MainActivityModule {
-
+    @Binds
+    fun getViewListener(impl : FragmentListener) : ViewListener
 }

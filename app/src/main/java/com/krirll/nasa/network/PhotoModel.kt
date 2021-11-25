@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class PhotoModel : Serializable {
+
+    override fun equals(other: Any?): Boolean {
+        return super.equals(other)
+    }
+
     @SerializedName("title")
     @Expose
     var title: String? = null
